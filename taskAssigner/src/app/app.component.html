@@ -3,7 +3,7 @@
   <ul id="users" >
     @for(user of users; track $index){
       <li>
-        <app-user [user]="user" (selectUser)="onSelectUser($event)"></app-user>
+        <app-user [user]="user" [selected]="user.id == activeUser" (selectUser)="onSelectUser($event)"></app-user>
       </li>
     }    
   </ul>

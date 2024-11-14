@@ -23,7 +23,7 @@ export class AppComponent {
   }
 
   onSelectUser(id:string){
-    console.log(id);
+   
     this.activeUser = id;
   }
 }
