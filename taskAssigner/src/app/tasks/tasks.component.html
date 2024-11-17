@@ -1,12 +1,12 @@
 @if(isAddTaskDialogOpen){
-    <app-newtask (taskSubmit)="onTaskSubmit($event)"/>
+    <app-newtask (taskSubmit)="onTaskAdd($event)" (onCancel)="onCloseTaskDialog()"/>
 }
 
 <section id="tasks">
     <header>
         <h2>{{name}}'s Task</h2>
         <menu>
-            <button (click)="onTaskAdd()">Add</button>
+            <button (click)="onNewTask()">Add</button>
         </menu>
     </header>
     <ul>

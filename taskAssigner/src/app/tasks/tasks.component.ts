@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { TaskComponent } from "./task/task.component";
 import  {dummyTasks}  from "../dummy-tasks";
 import { NewtaskComponent } from "./newtask/newtask.component";
+import { FormGroup } from '@angular/forms';
+import { NewTask } from './newtask/newtask.model';
 
 @Component({
   selector: 'app-tasks',
@@ -25,12 +27,25 @@ export class TasksComponent {
     this.tasks = this.tasks.filter(task=> task.id != taskId);
   }
 
-  onTaskAdd(){
+  onNewTask(){
     this.isAddTaskDialogOpen = true;
   }
 
-  onTaskSubmit(taskSummary:string){
+  onTaskAdd(task:NewTask){
     //Task summary will save
+    this.tasks.push({
+      id: new Date().getTime().toString(),
+      title : task.title,
+      summary : task.summary,
+      dueDate : task.duedate,
+      userId : this.userId
+    });
+    this.isAddTaskDialogOpen = false;
+  }
+
+  onCloseTaskDialog(){
+    
+    this.isAddTaskDialogOpen = false;
   }
  
 }
