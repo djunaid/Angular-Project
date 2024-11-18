@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { TaskComponent } from "./task/task.component";
-import  {dummyTasks}  from "../dummy-tasks";
 import { NewtaskComponent } from "./newtask/newtask.component";
-import { FormGroup } from '@angular/forms';
 import { NewTask } from './newtask/newtask.model';
+import { TaskService} from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -12,40 +11,32 @@ import { NewTask } from './newtask/newtask.model';
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
-export class TasksComponent {
+export class TasksComponent { 
+
+  constructor(private taskService: TaskService){    
+  }
+
   @Input({required: true}) name!:string;
   @Input({required: true}) userId!:string;
   isAddTaskDialogOpen:boolean = false;
 
-  tasks = dummyTasks;
+ 
 
   get SelectedUserTasks(){
-    return this.tasks.filter((task) => task.userId == this.userId);
+    return this.taskService.getUserTasks(this.userId);
   }
 
   onTaskComplete(taskId: string){
-    this.tasks = this.tasks.filter(task=> task.id != taskId);
+    
   }
 
   onNewTask(){
     this.isAddTaskDialogOpen = true;
   }
 
-  onTaskAdd(task:NewTask){
-    //Task summary will save
-    this.tasks.push({
-      id: new Date().getTime().toString(),
-      title : task.title,
-      summary : task.summary,
-      dueDate : task.duedate,
-      userId : this.userId
-    });
-    this.isAddTaskDialogOpen = false;
-  }
-
-  onCloseTaskDialog(){
-    
+  onCloseTaskDialog(){    
     this.isAddTaskDialogOpen = false;
   }
  
 }
+

@@ -1,5 +1,5 @@
 @if(isAddTaskDialogOpen){
-    <app-newtask (taskSubmit)="onTaskAdd($event)" (onCancel)="onCloseTaskDialog()"/>
+    <app-newtask [userId]="userId" (close)="onCloseTaskDialog()"/>
 }
 
 <section id="tasks">
